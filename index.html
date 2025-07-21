@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <title>抽签轮盘</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 标题区域 -->
+        <header class="header">
+            <h1> 抽奖点名</h1>
+            <p>点击按钮开始抽签</p>
+        </header>
+
+        <!-- 轮盘区域 -->
+        <div class="lottery-container">
+            <div class="wheel-wrapper">
+                <!-- 外圈装饰 -->
+                <div class="wheel-border">
+                    <div class="border-dot"></div>
+                    <div class="border-dot"></div>
+                    <div class="border-dot"></div>
+                    <div class="border-dot"></div>
+                    <div class="border-dot"></div>
+                    <div class="border-dot"></div>
+                    <div class="border-dot"></div>
+                    <div class="border-dot"></div>
+                    <div class="border-dot"></div>
+                    <div class="border-dot"></div>
+                    <div class="border-dot"></div>
+                    <div class="border-dot"></div>
+                    <div class="border-dot"></div>
+                    <div class="border-dot"></div>
+                    <div class="border-dot"></div>
+                    <div class="border-dot"></div>
+                </div>
+                
+                <!-- SVG轮盘 -->
+                <svg class="wheel" id="wheel" viewBox="0 0 300 300" width="270" height="270">
+                    <!-- 扇形1 -->
+                    <path d="M 150 150 L 150 0 A 150 150 0 0 1 256.066 43.934 Z" 
+                          fill="url(#gradient1)" stroke="#d4a574" stroke-width="2"/>
+                    <text x="190" y="60" text-anchor="middle" class="sector-text" transform="rotate(22.5 190 60)">三三</text>
+                    
+                    <!-- 扇形2 -->
+                    <path d="M 150 150 L 256.066 43.934 A 150 150 0 0 1 300 150 Z" 
+                          fill="url(#gradient2)" stroke="#d4a574" stroke-width="2"/>
+                    <text x="240" y="110" text-anchor="middle" class="sector-text" transform="rotate(67.5 240 110)">小璐</text>
+                    
+                    <!-- 扇形3 -->
+                    <path d="M 150 150 L 300 150 A 150 150 0 0 1 256.066 256.066 Z" 
+                          fill="url(#gradient1)" stroke="#d4a574" stroke-width="2"/>
+                    <text x="240" y="190" text-anchor="middle" class="sector-text" transform="rotate(112.5 240 190)">小马</text>
+                    
+                    <!-- 扇形4 -->
+                    <path d="M 150 150 L 256.066 256.066 A 150 150 0 0 1 150 300 Z" 
+                          fill="url(#gradient2)" stroke="#d4a574" stroke-width="2"/>
+                    <text x="190" y="240" text-anchor="middle" class="sector-text" transform="rotate(157.5 190 240)">小刘</text>
+                    
+                    <!-- 扇形5 -->
+                    <path d="M 150 150 L 150 300 A 150 150 0 0 1 43.934 256.066 Z" 
+                          fill="url(#gradient1)" stroke="#d4a574" stroke-width="2"/>
+                    <text x="110" y="240" text-anchor="middle" class="sector-text" transform="rotate(202.5 110 240)">云墨</text>
+                    
+                    <!-- 扇形6 -->
+                    <path d="M 150 150 L 43.934 256.066 A 150 150 0 0 1 0 150 Z" 
+                          fill="url(#gradient2)" stroke="#d4a574" stroke-width="2"/>
+                    <text x="60" y="190" text-anchor="middle" class="sector-text" transform="rotate(247.5 60 190)">刘总</text>
+                    
+                    <!-- 扇形7 -->
+                    <path d="M 150 150 L 0 150 A 150 150 0 0 1 43.934 43.934 Z" 
+                          fill="url(#gradient1)" stroke="#d4a574" stroke-width="2"/>
+                    <text x="60" y="110" text-anchor="middle" class="sector-text" transform="rotate(292.5 60 110)">芋圆</text>
+                    
+                    <!-- 扇形8 -->
+                    <path d="M 150 150 L 43.934 43.934 A 150 150 0 0 1 150 0 Z" 
+                          fill="url(#gradient2)" stroke="#d4a574" stroke-width="2"/>
+                    <text x="110" y="60" text-anchor="middle" class="sector-text" transform="rotate(337.5 110 60)">花子</text>
+                    
+                    <!-- 渐变定义 -->
+                    <defs>
+                        <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#ffeaa7"/>
+                            <stop offset="100%" style="stop-color:#fdcb6e"/>
+                        </linearGradient>
+                        <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#fdcb6e"/>
+                            <stop offset="100%" style="stop-color:#ffeaa7"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                
+                <!-- 指针 -->
+                <div class="pointer"></div>
+                
+                <!-- 中心圆 -->
+                <div class="center-circle">
+                    <div class="center-text">点击<br>抽奖</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 控制区域 -->
+        <div class="controls">
+            <button id="spinBtn" class="spin-button">
+                <span class="button-text">开始抽签</span>
+                <span class="button-icon">🎲</span>
+            </button>
+        </div>
+
+        <!-- 结果显示区域 -->
+        <div class="result-container">
+            <div id="result" class="result">
+                <div class="result-label">抽签结果</div>
+                <div class="result-value" id="resultValue">点击按钮开始</div>
+            </div>
+        </div>
+
+        <!-- 历史记录 -->
+        <div class="history-container">
+            <h3>历史记录</h3>
+            <div id="history" class="history-list">
+                <div class="history-empty">暂无记录</div>
+            </div>
+            <button id="clearHistory" class="clear-button">清空记录</button>
+        </div>
+    </div>
+
+    <script src="js/lottery.js"></script>
+</body>
+</html>
